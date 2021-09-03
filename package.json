@@ -1,0 +1,74 @@
+{
+    "name": "node-grpc-server",
+    "version": "0.0.1",
+    "description": "Simple grpc lib for rpc server",
+    "main": "./build/src/index.js",
+    "scripts": {
+        "build": "del-cli -rf build && tsc",
+        "start": "node build/index.js",
+        "lint": "eslint \"src/**\"",
+        "prepare": "husky install",
+        "format": "prettier --parser typescript --trailing-comma all --write \"src/**/*.{ts,tsx}\"",
+        "prettier:check": "prettier --list-different  --trailing-comma all --parser typescript \"src/**/*.{ts,tsx}\"",
+        "prettier:write": "prettier --parser typescript --trailing-comma all --write \"src/**/*.{ts,tsx}\"",
+        "test:api": "mocha --colors --require ts-node/register --file test/bootstrap.ts test/api/**/*.spec.ts",
+        "test": "mocha --colors --require ts-node/register --file  test/bootstrap.ts test/**/*.spec.ts",
+        "coverage": "nyc npm run test"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "eslint"
+        ]
+    },
+    "lint-prepush": {
+        "base": "develop",
+        "tasks": {
+            "*.{js,jsx,ts,tsx}": [
+                "eslint"
+            ]
+        }
+    },
+    "nyc": {
+        "extends": "@istanbuljs/nyc-config-typescript",
+        "extension": [
+            ".ts"
+        ],
+        "exclude": [
+            "**/*.d.ts",
+            "**/test/**/*",
+            "**/*.js",
+            "**/config.ts",
+            "./coverage"
+        ],
+        "excludeNodeModules": true,
+        "reporter": [
+            "text",
+            "lcov"
+        ],
+        "all": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com:enterprise-diesel/node-grpc-server.git"
+    },
+    "author": {
+        "name": "Krilovskiy Vladislav",
+        "email": "vlad.cv.mail@gmail.com",
+        "url": "tg://@little0big"
+    },
+    "license": "ISC",
+    "homepage": "https://github.com/enterprise-diesel/node-grpc-server#readme",
+    "devDependencies": {
+        "del-cli": "3.0.1",
+        "eslint": "^7.32.0",
+        "husky": "^7.0.2",
+        "lint-prepush": "^2.2.0",
+        "lint-staged": "^11.1.2",
+        "precise-commits": "^1.0.2",
+        "prettier": "^2.3.2",
+        "typescript": "^4.4.2"
+    },
+    "dependencies": {
+        "tslib": "^2.3.1"
+    }
+}
