@@ -10,9 +10,6 @@
         "prepare": "husky install",
         "format": "prettier --write .",
         "precise-commits": "precise-commits",
-        "prettier:check": "prettier --list-different  --trailing-comma all --parser typescript \"src/**/*.{ts,tsx}\"",
-        "prettier:write": "prettier --parser typescript --trailing-comma all --write \"src/**/*.{ts,tsx}\"",
-        "test:api": "mocha --colors --require ts-node/register --file test/bootstrap.ts test/api/**/*.spec.ts",
         "test": "mocha --colors --require ts-node/register --file  test/bootstrap.ts test/**/*.spec.ts",
         "coverage": "nyc npm run test"
     },
@@ -21,7 +18,7 @@
             "eslint"
         ],
         "*.ts": "eslint --cache --fix",
-        "*.{ts}": "prettier --write"
+        "*.{ts}": "prettier --parser typescript --write"
     },
     "lint-prepush": {
         "base": "develop",
